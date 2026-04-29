@@ -1,24 +1,45 @@
 package LogisticProblem;
 
-abstract class CheckPoint {
-    String checkpointId;
-    String locationName;
-    int distanceFromLast; // in kilometers
-    int expectedDuration; // in minutes
-    int actualDuration; // in minutes
+abstract class Checkpoint {
+    private String checkpointId;
+    private String locationName;
+    private double distanceFromLast;
+    private int expectedDuration;
+    private int actualDuration;
 
-    public CheckPoint(String checkpointId, String locationName, int distanceFromLast, int expectedDuration, int actualDuration) {
-        this.checkpointId = checkpointId;
-        this.actualDuration = actualDuration;
-        this.expectedDuration = expectedDuration;
-        this.locationName = locationName;
-        this.distanceFromLast = distanceFromLast;
+    public Checkpoint(String id, String location, double distance, int expected, int actual) {
+        this.checkpointId = id;
+        this.locationName = location;
+        this.distanceFromLast = distance;
+        this.expectedDuration = expected;
+        this.actualDuration = actual;
     }
+
+    public String getCheckpointId() {
+        return checkpointId;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public double getDistanceFromLast() {
+        return distanceFromLast;
+    }
+
+    public int getExpectedDuration() {
+        return expectedDuration;
+    }
+
+    public int getActualDuration() {
+        return actualDuration;
+    }
+
     public boolean isDelayed() {
         return actualDuration > expectedDuration;
     }
 
-    public abstract boolean isCritical();
-    public abstract String getType();
-    public abstract double calculatePenalty();
+    abstract boolean isCritical();
+    abstract String getType();
+    abstract double calculatePenalty();
 }

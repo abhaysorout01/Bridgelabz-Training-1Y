@@ -1,22 +1,23 @@
 package LogisticProblem;
 
-public class RestCheckpoint extends CheckPoint {
+class RestCheckpoint extends Checkpoint {
 
-    public RestCheckpoint(String id, String loc, int d, int e, int a) {
-        super(id, loc, d, e, a);
+    public RestCheckpoint(String id, String loc, double dist, int exp, int act) {
+        super(id, loc, dist, exp, act);
     }
 
-    public boolean isCritical() { return false; }
+    boolean isCritical() {
+        return false;
+    }
 
-    public String getType() { return "RestCheckpoint"; }
+    String getType() {
+        return "Rest";
+    }
 
-    public double calculatePenalty() {
-        if(!isDelayed()) return 0;
+    double calculatePenalty() {
+        if (!isDelayed()) return 0;
 
-        int delay = actualDuration - expectedDuration;
-        if(delay > 30) return delay * 0.5;
-
-        return 0;
+        int delay = getActualDuration() - getExpectedDuration();
+        return delay > 30 ? delay * 0.5 : 0;
     }
 }
-
